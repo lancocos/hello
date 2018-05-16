@@ -1,4 +1,4 @@
-./app/config/config.php
-./app/sqllog/
-./cache/
-./public/temp/
+app/config/config.php
+app/sqllog/
+cache/
+public/temp/
