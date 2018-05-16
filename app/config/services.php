@@ -77,6 +77,9 @@ $di->setShared('db', function () {
         unset($params['charset']);
     }
     $manager = new Phalcon\Events\Manager;
+    $dbplugin = new DbPlugin();
+    $manager->attach("db",$dbplugin);
+    /*
     $profiler = new Phalcon\Db\Profiler();
     $manager->attach("db",function($event,$conn) use($profiler){
         if($event->getType()=="beforeQuery"){
@@ -86,14 +89,15 @@ $di->setShared('db', function () {
             $profiler->stopProfile();
             $profile = $profiler->getLastProfile();
             $sql = $profile->getSQLStatement();
-            $params = $conn->getSqlVariables();
+            $param = $conn->getSqlVariables();
             $executeTime = $profile->getTotalElapsedSeconds();
-            (is_array($params) && count($params)) && $params = json_encode($params);
+            (is_array($param) && count($param)) && $param = json_encode($param);
             $logger = new Phalcon\Logger\Adapter\File(APP_PATH."/sqllog/sql-".date('Ymd').".txt");
-            $logger->log("[".$executeTime." ms ] ".$sql.$params);
+            $logger->log("[".$executeTime." ms ] ".$sql.$param);
             
         }
     });
+    */
 
     $connection = new $class($params);
     $connection->setEventsManager($manager);
@@ -131,4 +135,14 @@ $di->setShared('session', function () {
 
     return $session;
 });
+
+$di->set("dispatcher",function(){
+    $manager = new Phalcon\Events\Manager();
+    $sec = new SecurityPlugin();
+    $manager->attach("dispatch",$sec);
+    $dispatcher = new Phalcon\Mvc\Dispatcher();
+    $dispatcher->setEventsManager($manager);
+    return $dispatcher;
+});
+
 

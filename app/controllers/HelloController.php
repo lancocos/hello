@@ -5,11 +5,13 @@ class HelloController extends \Phalcon\Mvc\Controller
 
     public function indexAction()
     {
-        echo 111;
+        echo "index";
         $this->view->disable();
     }
     public function helloAction(){
-        echo 222;
+        //var_dump($this->di->get("session"));
+        //var_dump($this->di->get("flash"));
+        var_dump($this->di->get("dispatcher"));
         $this->view->disable();
     }
 
