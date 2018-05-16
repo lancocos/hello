@@ -1,0 +1,8 @@
+<?php
+?>
+<h1>form</h1>
+<?php echo $this->tag->linkTo(['hello/hello',"hello"]);?>
+<?php echo $this->tag->form('signin');?>
+<div><?php echo $this->tag->textField("name");?></div>
+<div><?php echo $this->tag->passwordField("pass");?></div>
+<div><?php echo $this->tag->submitbutton("submit");?></div>

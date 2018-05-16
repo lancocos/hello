@@ -1,0 +1,9 @@
+[Wed, 16 May 18 03:27:21 +0000][DEBUG] [0.00057315826416016 ms ]SELECT IF(COUNT(*) > 0, 1, 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`= 'user' AND `TABLE_SCHEMA` = 'test'
+[Wed, 16 May 18 03:27:21 +0000][DEBUG] [0.0011129379272461 ms ]DESCRIBE `test`.`user`
+[Wed, 16 May 18 03:27:21 +0000][DEBUG] [0.00024795532226562 ms ]SELECT `user`.`id`, `user`.`name`, `user`.`pass`, `user`.`created_at` FROM `test`.`user` WHERE `user`.`name` = :name AND `user`.`pass` = :pass LIMIT :APL0{"name":"imwz","pass":"58a2ca480c5f6479e0ea8bd52dd553cb44e1d4d2","APL0":1}
+[Wed, 16 May 18 03:27:57 +0000][DEBUG] [0.0006248950958252 ms ]SELECT IF(COUNT(*) > 0, 1, 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`= 'user' AND `TABLE_SCHEMA` = 'test'
+[Wed, 16 May 18 03:27:57 +0000][DEBUG] [0.00095391273498535 ms ]DESCRIBE `test`.`user`
+[Wed, 16 May 18 03:27:57 +0000][DEBUG] [0.0001680850982666 ms ]SELECT COUNT(*) AS `rowcount` FROM `test`.`user` WHERE `user`.`name` = :0{":0":"imwz"}
+[Wed, 16 May 18 03:33:05 +0000][DEBUG] [0.00056886672973633 ms ] SELECT IF(COUNT(*) > 0, 1, 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`= 'user' AND `TABLE_SCHEMA` = 'test'
+[Wed, 16 May 18 03:33:05 +0000][DEBUG] [0.00099611282348633 ms ] DESCRIBE `test`.`user`
+[Wed, 16 May 18 03:33:05 +0000][DEBUG] [0.00020217895507812 ms ] SELECT COUNT(*) AS `rowcount` FROM `test`.`user` WHERE `user`.`name` = :0{":0":"imwz"}
