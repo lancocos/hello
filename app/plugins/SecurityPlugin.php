@@ -24,9 +24,9 @@ class SecurityPlugin extends Plugin
         "errors"   => ["show404", "show500"],
         "session"  => ["index", "register", "start", "end"],
         "contact"  => ["index", "send"],
+        'signin'=>['index'],
     ];
     public function __construct(){
-        echo 000;
         $this->acl = new AclList();
         $this->acl->setDefaultAction(
             Acl::DENY
@@ -51,11 +51,29 @@ class SecurityPlugin extends Plugin
                 $actions
             );
         }
-        
+        foreach ($roles as $role) {
+            foreach ($this->publicResources as $resource => $actions) {
+                $this->acl->allow(
+                $role->getName(),
+                $resource,
+                "*"
+            );
+        }
+    }
+    foreach ($this->privateResources as $resource => $actions) {
+        foreach ($actions as $action) {
+            $this->acl->allow(
+                "Users",
+                $resource,
+                $action
+            );
+        }
+    }
+    
     }
     public function beforeExecuteRoute()
     {
-        $auth = $this->session->get("auth");
+        $auth = $this->session->get("user");
 
         if (!$auth) {
             $this->role = "Guests";
@@ -63,15 +81,19 @@ class SecurityPlugin extends Plugin
             $this->role = "Users";
         }
         echo $this->role;
-        echo $controller = $this->dispatcher->getControllerName();
-        echo $action     = $this->dispatcher->getActionName();
-        var_dump($this->acl);
         
-        echo 111;
+        $controller = $this->dispatcher->getControllerName();
+        $action     = $this->dispatcher->getActionName();
+       if ($this->acl->isAllowed($this->role, $controller, $action)) {
+            echo "Access granted!";
+            return true;
+        } else {
+            echo "Access denied :(";
+            return false;
+        }
     }
     public function beforeDispatchLoop()
     {
-      echo 222;  
     
     }
     public function beforeDispatch()

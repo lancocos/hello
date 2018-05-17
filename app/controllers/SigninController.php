@@ -16,6 +16,11 @@ class SigninController extends \Phalcon\Mvc\Controller
             ]);
         if($record){
             echo "welcome ".$record->name;
+            $this->session->set(
+                'user',$record
+            );
+            $this->response->redirect('products/index');
+                
         }
         $this->view->disable();
 
