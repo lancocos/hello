@@ -2,3 +2,4 @@ app/config/config.php
 app/sqllog/
 cache/
 public/temp/
+.idea/
