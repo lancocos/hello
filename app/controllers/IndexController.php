@@ -5,6 +5,8 @@ class IndexController extends ControllerBase
 
     public function indexAction()
     {
+        echo 111;
+        var_dump($this->persistent->searchParams=null);
         $this->view->disable();
     
     }
